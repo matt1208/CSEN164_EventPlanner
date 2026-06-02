@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event Planner Dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body style="font-family: sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333;">
+    <header style="background: #2c3e50; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;">
+      <a href="<%= root_path %>" style="color: white; font-weight: bold; text-decoration: none; font-size: 1.5rem;">EventPlanner</a>
+      <nav style="display: flex; gap: 20px; align-items: center;">
+        <a href="<%= events_path %>" style="color: #ecf0f1; text-decoration: none;">Browse Events</a>
+        <% if logged_in? %>
+          <a href="<%= new_event_path %>" style="color: #ecf0f1; text-decoration: none; font-weight: bold;">+ Create Event</a>
+          <span style="color: #bdc3c7; font-size: 0.9rem;">Logged in as: <strong><%= current_user.name %></strong><%= " (Admin)" if current_user.admin? %></span>
+          <%= button_to "Log Out", logout_path, method: :delete, style: "background: #e74c3c; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px;" %>
+        <% else %>
+          <a href="<%= login_path %>" style="color: #ecf0f1; text-decoration: none;">Log In</a>
+          <a href="<%= signup_path %>" style="background: #3498db; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px;">Sign Up</a>
+        <% end %>
+      </nav>
+    </header>
+
+    <main style="max-width: 1000px; margin: 30px auto; padding: 0 20px;">
+      <% if flash[:notice] %>
+        <div style="background: #d4edda; color: #155724; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #c3e6cb;"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div style="background: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border-radius: 4px; border: 1px solid #f5c6cb;"><%= flash[:alert] %></div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+  </body>
+</html>

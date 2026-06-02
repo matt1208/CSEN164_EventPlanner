@@ -1,0 +1,15 @@
+<div style="max-width: 400px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+  <h2 style="margin-top: 0; color: #2c3e50; text-align: center;">Log In</h2>
+
+  <%= form_with url: login_path, method: :post, local: true, style: "display: flex; flex-direction: column; gap: 15px; margin-top: 20px;" do |f| %>
+    <div>
+      <%= f.label :email, "Email Address", style: "display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem;" %>
+      <%= f.email_field :email, style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" %>
+    </div>
+    <div>
+      <%= f.label :password, "Password", style: "display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem;" %>
+      <%= f.password_field :password, style: "width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" %>
+    </div>
+    <%= f.submit "Log In", style: "background: #2c3e50; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px;" %>
+  <% end %>
+</div>
